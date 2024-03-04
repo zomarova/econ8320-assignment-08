@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Test Class Initialization",
+      "setup": "",
+      "run": "python -m unittest tests/testClassInitialization.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 1
+    },
+    {
+      "name": "Test OLS Implementation",
+      "setup": "",
+      "run": "python -m unittest tests/testOLSImplementation.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 1
+    },
+    {
+      "name": "Test OLS Accuracy",
+      "setup": "",
+      "run": "python -m unittest tests/testOLSAccuracy.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 2
+    },
+    {
+      "name": "Test OLS Output",
+      "setup": "",
+      "run": "python -m unittest tests/testOLSOutput.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 2
+    }
+  ]
+}
