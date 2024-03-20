@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
       stdout = system.stdout
       system.stdout = io.StringIO()
 
-      data = pd.read_csv("/tests/files/assignment8Data.csv")
+      data = pd.read_csv("tests/files/assignment8Data.csv")
       x = data[['sex','age','educ','white']]
       y = data['incwage']
       reg = RegressionModel(x, y, create_intercept=True)

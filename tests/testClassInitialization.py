@@ -24,7 +24,7 @@ for i in code:
 # todo: replace this with an actual test
 class TestCase(unittest.TestCase):
     def testClassInit(self):
-      data = pd.read_csv("/tests/files/assignment8Data.csv")
+      data = pd.read_csv("tests/files/assignment8Data.csv")
       x = data[['sex','age','educ','white']]
       y = data['incwage']
       reg = RegressionModel(x, y, create_intercept=True)
