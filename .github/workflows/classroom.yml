@@ -1,25 +1,69 @@
-name: GitHub Classroom Workflow
-
-on:
-  - push
-  - workflow_dispatch
-
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+- push
 permissions:
   checks: write
   actions: read
   contents: read
-
 jobs:
-  build:
-    name: Autograding
+  run-autograding-tests:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
           python-version: '3.9'
-      - run: |
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install Dependencies
+      run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - uses: education/autograding@v1
+    - name: Test Class Initialization
+      id: test-init
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Class Initialization
+        setup-command: ''
+        command: python -m unittest tests/testClassInitialization.py
+        timeout: 1
+        max-score: 1
+    - name: Test OLS Implementation
+      id: test-implementation
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test OLS Implementation
+        setup-command: ''
+        command: python -m unittest tests/testOLSImplementation.py
+        timeout: 1
+        max-score: 2
+    - name: Test OLS Output
+      id: test-output
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test OLS Output
+        setup-command: ''
+        command: python -m unittest tests/testOLSOutput.py
+        timeout: 1
+        max-score: 2
+    - name: Test OLS Accuracy
+      id: test-accuracy
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test OLS Accuracy
+        setup-command: ''
+        command: python -m unittest tests/testOLSAccuracy.py
+        timeout: 1
+        max-score: 2
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-INITIALIZATION_RESULTS: "${{steps.test-init.outputs.result}}"
+        TEST-IMPLEMENTATION_RESULTS: "${{steps.test-implementation.outputs.result}}"
+        TEST-OUTPUTS_RESULTS: "${{steps.test-output.outputs.result}}"
+        TEST-ACCURACY_RESULTS: "${{steps.test-accuracy.outputs.result}}"
+      with:
+        runners: test-init,test-implementation,test-output,test-accuracy
