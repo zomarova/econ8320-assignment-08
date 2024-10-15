@@ -61,9 +61,9 @@ jobs:
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        TEST-INITIALIZATION_RESULTS: "${{steps.test-init.outputs.result}}"
+        TEST-INIT_RESULTS: "${{steps.test-init.outputs.result}}"
         TEST-IMPLEMENTATION_RESULTS: "${{steps.test-implementation.outputs.result}}"
-        TEST-OUTPUTS_RESULTS: "${{steps.test-output.outputs.result}}"
+        TEST-OUTPUT_RESULTS: "${{steps.test-output.outputs.result}}"
         TEST-ACCURACY_RESULTS: "${{steps.test-accuracy.outputs.result}}"
       with:
         runners: test-init,test-implementation,test-output,test-accuracy
